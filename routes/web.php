@@ -100,6 +100,10 @@ Route::middleware(['auth'])->group(function(){
         Route::get('logs/index','LogsController@index')->name('logs.index')
         ->middleware('can:logs.index' );
 
+        //definir permisos
+        Route::get('logs/pdf','LogsController@pdf')->name('logs.pdf')
+        ->middleware('can:logs.index' );
+
     
 });
 

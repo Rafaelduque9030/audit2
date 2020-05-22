@@ -16,7 +16,7 @@
                             <tr>
                                 <th widht="10px" >ID</th>
                                 <th>Nombre</th>
-                                <th>Validacion</th>
+                                <th>Habilitado</th>
                                 <th colspan="3">&nbsp;</th>
                             </tr>
                         </thead>
@@ -25,7 +25,13 @@
                             <tr>
                                 <td>{{ $user->id}}</td>
                                 <td>{{ $user->name}}</td>
-                                <td>{{ $user->id}}</td>
+                                <td>
+                                    @if(count($user->roles) == 0)
+                                        No
+                                    @else
+                                        si
+                                    @endif
+                                </td>
                                 <td width="10px">
                                     @can('users.show')
                                     <a href="{{ route('users.show', $user->id) }}"

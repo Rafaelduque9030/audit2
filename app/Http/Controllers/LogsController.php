@@ -6,6 +6,8 @@ use App\logs;
 use Caffeinated\Shinobi\Models\Permission;
 use Illuminate\Http\Request;
 use Auth;
+use Barryvdh\DomPDF\Facade as PDF;
+use APP;
 
 class LogsController extends Controller
 {
@@ -122,5 +124,37 @@ class LogsController extends Controller
        // $logs->delete();
 
         //return back()->with('info','Eliminado Correctamente');
+    }
+
+    public function pdf(){
+        $logss=logs::all();
+        $pdf = app('dompdf.wrapper');
+        $html = '<table class="table table-striped table-hover">
+                    
+        <thead class="thead-light">
+            <tr>
+                <th widht="10px" >ID</th>
+                <th>Usuario</th>
+                <th>Accion</th>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th colspan="3">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>';
+        foreach ($logss as $log) {
+            $html .= '
+            <tr>
+                <td>'.$log->id.'</td>
+                <td>'.$log->user.'</td>
+                <td>'.$log->accion.'</td>
+                <td>'.$log->time.'</td>
+                <td>'.$log->name.'</td>   
+            </tr>';
+        }
+
+        $html .= '</tbody></table>';
+        $pdf->loadHTML($html);
+        return $pdf->stream();
     }
 }

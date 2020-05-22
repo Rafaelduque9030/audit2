@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Historial de Movimientos</div>
+                <div class="card-header">Historial de Movimientos <a target="_blank" href="/logs/pdf">Descargar PDF</a> </div>
 
                 <div class="card-body" >
                    <table class="table table-striped table-hover">
